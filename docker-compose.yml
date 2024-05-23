@@ -1,0 +1,25 @@
+services:
+  application:
+    image: restapp-1
+    container_name: restapp-container
+    build: .
+    ports:
+      - "80:8080"
+    environment:
+      - INFO_VALUE= from docker compose
+      - MYSQL_PWD=pwd
+      - MYSQL_HOST=mysql
+
+  mysql:
+    image: mysql
+    container_name: user-mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: pwd
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
